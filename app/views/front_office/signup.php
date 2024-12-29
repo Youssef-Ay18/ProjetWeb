@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_user']))
     $name = htmlspecialchars(trim($_POST['name']));
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $password = trim($_POST['password']);
-        if ($user->createUser($name, $email, $password)) 
+        if ($user->createUser($name, $email, $password, $role = 'user') ) 
         {
             $createdUser = $user->fetchByEmail($email);
             $_SESSION['user_id'] = $createdUser['id'];

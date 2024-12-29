@@ -1,5 +1,10 @@
 <?php
 include "../../controllers/Subject.php"; 
+session_start();  
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");  
+    exit;
+}
 $subject_id=$_GET['id']; 
 $subject =new Subject(config::getConnexion());
 try {

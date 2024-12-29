@@ -2,8 +2,8 @@
 include "../../controllers/db.php";
 include "../../controllers/Subject.php";
 include "../../controllers/Answer.php";
-
-$current_user_ID = 1; 
+session_start(); 
+$current_user_ID =  $_SESSION['user_id'];; 
 
 
 $subject = new Subject(config::getConnexion());

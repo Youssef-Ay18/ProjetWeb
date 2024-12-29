@@ -22,22 +22,26 @@ class User
         }
     
 
-        public function createUser($name, $email, $password)
-        {
-            try {
-                $stmt = $this->conn->prepare("
-                    INSERT INTO user (name, email, password) 
-                    VALUES (?, ?, ?)
-                ");
-                $stmt->bindValue(1, $name, PDO::PARAM_STR);
-                $stmt->bindValue(2, $email, PDO::PARAM_STR);
-                $stmt->bindValue(3, $password, PDO::PARAM_STR);
-                return $stmt->execute();
-            } catch (PDOException $e) {
-                error_log("Error in create(): " . $e->getMessage());
-                return false;
-            }
-        }
+        public function createUser($name, $email, $password, $role = 'user') 
+{
+    try {
+        $stmt = $this->conn->prepare("
+            INSERT INTO user (name, email, password, role) 
+            VALUES (?, ?, ?, ?)
+        ");
+
+        $stmt->bindValue(1, $name, PDO::PARAM_STR);  
+        $stmt->bindValue(2, $email, PDO::PARAM_STR); 
+        $stmt->bindValue(3, $password, PDO::PARAM_STR); 
+        $stmt->bindValue(4, $role, PDO::PARAM_STR); 
+
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        
+        error_log("Error in createUser(): " . $e->getMessage());
+        return false;
+    }
+}
         public function displayAll1()
         {
             try {

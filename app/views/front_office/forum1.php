@@ -1,13 +1,12 @@
 <?php
 session_start();  
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");  
+    header("Location: login.php");  
     exit;
 }
 include "../../controllers/Subject.php"; 
 include "../../controllers/Answer.php"; 
 $current_user_ID = $_SESSION['user_id'];
-$current_user_name = $_SESSION['name'];
 $question = new Subject(config::getConnexion());
 $answer = new Answer();
 
@@ -105,7 +104,6 @@ $questions =$question->displayAll1();
             <div class="question border p-3 mb-3">
                 <h3><?= htmlspecialchars($q['title']); ?></h3>
                 <p><?= htmlspecialchars($q['content']); ?></p>
-                <p><?php echo $current_user_name; ?></p>
                 <div class="buttons">
                     <?php if ($q['user_ID'] == $current_user_ID) : ?>
                         <a href="update.php?id=<?= intval($q['subject_ID']); ?>" class="btn btn-warning btn-sm">Update</a>
